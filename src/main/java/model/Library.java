@@ -27,11 +27,8 @@ public class Library {
             }
         }
         if(availableBooks.remove(checkoutBook)){
-            checkedOutBooks.add(checkoutBook);
             return true;
         }
         return false;
     }
-
-
 }

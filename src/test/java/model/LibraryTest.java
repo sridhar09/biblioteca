@@ -86,7 +86,7 @@ public class LibraryTest {
 
     @DisplayName("Return true for successful checkout of availableBooks")
     @Test
-    void testSuccessfullcheckout(){
+    void testSuccessfulcheckout(){
         List<Book> books = new ArrayList<>();
         books.add(book1);
         books.add(book2);
@@ -98,7 +98,7 @@ public class LibraryTest {
 
     @DisplayName("Return false for successful checkout of availableBooks")
     @Test
-    void testUnSuccessfullcheckout(){
+    void testUnSuccessfulCheckout(){
         List<Book> books = new ArrayList<>();
         books.add(book1);
         books.add(book2);
@@ -120,4 +120,6 @@ public class LibraryTest {
         assertTrue(library.checkout("book1"));
         assertFalse(library.checkout("book1"));
     }
+
+
 }
