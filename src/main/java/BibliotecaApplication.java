@@ -1,5 +1,5 @@
-import controller.LibraryController;
-import model.Library;
+
+import controller.LibraryManagementSystem;
 import model.Book;
 import view.*;
 
@@ -9,8 +9,8 @@ import java.util.List;
 public class BibliotecaApplication {
     public static void main(String[] args){
         ConsoleOutputDriver consoleOutputDriver = new ConsoleOutputDriver();
-        List<Book> books = new ArrayList<>();
-        Library library =new Library(consoleOutputDriver, books);
-        library.printBookList();
+        ConsoleInputDriver consoleInputDriver = new ConsoleInputDriver();
+        LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(consoleOutputDriver,consoleInputDriver);
+        libraryManagementSystem.showMenu();
     }
 }

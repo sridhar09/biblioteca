@@ -1,21 +1,37 @@
 package model;
 
-import controller.LibraryController;
-import view.OutputDriver;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class Library {
-    Collection<Book> books;
-    private LibraryController libraryController;
-    public Library(OutputDriver outputDriver, Collection<Book> books){
-        this.books = new ArrayList<>(books);
-        libraryController = new LibraryController(outputDriver);
+    private Collection<Book> availableBooks;
+    private Collection<Book> checkedOutBooks;
+    public Library(Collection<Book> availableBooks){
+        this.availableBooks = new ArrayList<>(availableBooks);
     }
 
-    public void printBookList(){
-        libraryController.printBookList(books);
+    public Collection<String> getBookList(){
+        Collection<String> bookTitleList = new ArrayList<>();
+        for(Book book : availableBooks){
+            bookTitleList.add(book.toString());
+        }
+        return bookTitleList;
     }
+
+    public boolean checkout(String bookTitle){
+        Book checkoutBook = null;
+        for(Book book : availableBooks){
+            if(book.getTitle().equals(bookTitle)){
+                checkoutBook = book;
+                break;
+            }
+        }
+        if(availableBooks.remove(checkoutBook)){
+            checkedOutBooks.add(checkoutBook);
+            return true;
+        }
+        return false;
+    }
+
 
 }
