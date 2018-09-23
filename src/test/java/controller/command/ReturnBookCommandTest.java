@@ -30,9 +30,9 @@ class ReturnBookCommandTest {
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
         when(inputDriver.readString()).thenReturn("Book1");
-        when(mockLibrary.checkout("Book1")).thenReturn(true);
-        new CheckoutBookCommand().perform(mockLibrary,inputDriver,outputDriver);
-        verify(outputDriver).println("Thank you! Enjoy the book");
+        when(mockLibrary.returnItem("Book1")).thenReturn(true);
+        new ReturnBookCommand().perform(mockLibrary,inputDriver,outputDriver);
+        verify(outputDriver).println("Thank you for returning the book.");
     }
 
 }
