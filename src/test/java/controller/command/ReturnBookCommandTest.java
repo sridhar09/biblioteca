@@ -23,4 +23,16 @@ class ReturnBookCommandTest {
         verify(mockLibrary).returnItem("Book1");
     }
 
+    @Test
+    @DisplayName("Should print Success Message when checkout successful")
+    void testCheckoutTrue(){
+        Library mockLibrary = mock(Library.class);
+        OutputDriver outputDriver = mock(OutputDriver.class);
+        InputDriver inputDriver = mock(InputDriver.class);
+        when(inputDriver.readString()).thenReturn("Book1");
+        when(mockLibrary.checkout("Book1")).thenReturn(true);
+        new CheckoutBookCommand().perform(mockLibrary,inputDriver,outputDriver);
+        verify(outputDriver).println("Thank you! Enjoy the book");
+    }
+
 }

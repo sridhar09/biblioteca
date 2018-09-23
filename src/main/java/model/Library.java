@@ -34,7 +34,7 @@ public class Library {
         return false;
     }
 
-    public void returnItem(String bookTitle) {
+    public boolean returnItem(String bookTitle) {
         Book returnBook = null;
         for(Book book : checkedOutBooks){
             if(book.getTitle().equals(bookTitle)){
@@ -42,7 +42,10 @@ public class Library {
                 break;
             }
         }
-        checkedOutBooks.remove(returnBook);
-        availableBooks.add(returnBook);
+        if(checkedOutBooks.remove(returnBook)) {
+            availableBooks.add(returnBook);
+            return true;
+        }
+        return false;
     }
 }

@@ -144,4 +144,29 @@ public class LibraryTest {
         details.add(detail1);
         assertEquals(details,library.getBookList());
     }
+
+    @DisplayName("Return true for successful checkout of availableBooks")
+    @Test
+    void testSuccessfulReturn(){
+        List<Book> books = new ArrayList<>();
+        books.add(book1);
+        books.add(book2);
+        books.add(book3);
+        books.add(book4);
+        Library library = new Library(books);
+        assertTrue(library.checkout("book1"));
+    }
+
+    @DisplayName("Return false for successful checkout of availableBooks")
+    @Test
+    void testUnSuccessfulReturn(){
+        List<Book> books = new ArrayList<>();
+        books.add(book1);
+        books.add(book2);
+        books.add(book3);
+        books.add(book4);
+        Library library = new Library(books);
+        assertFalse(library.checkout("book5"));
+    }
+
 }
