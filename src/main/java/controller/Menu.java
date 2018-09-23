@@ -1,9 +1,6 @@
 package controller;
 
-import controller.command.CheckoutBookCommand;
-import controller.command.Command;
-import controller.command.ListBooksCommand;
-import controller.command.QuitCommand;
+import controller.command.*;
 import model.Library;
 import view.InputDriver;
 import view.OutputDriver;
@@ -12,6 +9,7 @@ public enum Menu {
 
     LIST_BOOKS("List all the Books.",new ListBooksCommand()),
     CHECKOUT_BOOKS("Checkout a Book.",new CheckoutBookCommand()),
+    RETURN_BOOK("Return Book", new ReturnBookCommand()),
     QUIT("Quit",new QuitCommand());
 
     private final String displayName;

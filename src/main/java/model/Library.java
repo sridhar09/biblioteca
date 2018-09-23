@@ -8,6 +8,7 @@ public class Library {
     private Collection<Book> checkedOutBooks;
     public Library(Collection<Book> availableBooks){
         this.availableBooks = new ArrayList<>(availableBooks);
+        checkedOutBooks = new ArrayList<>();
     }
 
     public Collection<String> getBookList(){
@@ -27,8 +28,21 @@ public class Library {
             }
         }
         if(availableBooks.remove(checkoutBook)){
+            checkedOutBooks.add(checkoutBook);
             return true;
         }
         return false;
+    }
+
+    public void returnItem(String bookTitle) {
+        Book returnBook = null;
+        for(Book book : checkedOutBooks){
+            if(book.getTitle().equals(bookTitle)){
+                returnBook = book;
+                break;
+            }
+        }
+        checkedOutBooks.remove(returnBook);
+        availableBooks.add(returnBook);
     }
 }

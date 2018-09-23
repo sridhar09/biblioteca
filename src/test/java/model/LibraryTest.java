@@ -120,6 +120,28 @@ public class LibraryTest {
         assertTrue(library.checkout("book1"));
         assertFalse(library.checkout("book1"));
     }
+    @DisplayName("Checked out availableBooks should be in the list of availableBooks")
+    @Test
+    void testReturnForBook(){
+        List<Book> books = new ArrayList<>();
+        books.add(book1);
+        books.add(book2);
+        books.add(book3);
+        books.add(book4);
+        Library library = new Library(books);
+        List<String> details = new ArrayList<>();
+        details.add(detail1);
+        details.add(detail2);
+        details.add(detail3);
+        details.add(detail4);
+        assertEquals(details,library.getBookList());
 
+        library.checkout("book1");
+        details.remove(detail1);
+        assertEquals(details,library.getBookList());
 
+        library.returnItem("book1");
+        details.add(detail1);
+        assertEquals(details,library.getBookList());
+    }
 }
