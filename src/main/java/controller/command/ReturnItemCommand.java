@@ -1,20 +1,27 @@
 package controller.command;
 
 import model.Library;
+import model.LibraryItemType;
 import view.InputDriver;
 import view.OutputDriver;
 
 import static model.LibraryItemType.BOOK;
 
-public class ReturnBookCommand implements Command {
+public class ReturnItemCommand implements Command {
     private static final String INPUT_BOOK_NAME_MESSAGE= "LibraryItem title:\n";
-    private static final String SUCCESSFUL_RETURN_MESSAGE = "Thank you for returning the book.";
-    private static final String UNSUCCESSFUL_RETURN_MESSAGE = "That is not a valid book to return.";
+    private static final String SUCCESSFUL_RETURN_MESSAGE = "Thank you for returning the item.";
+    private static final String UNSUCCESSFUL_RETURN_MESSAGE = "That is not a valid item to return.";
+    private final LibraryItemType itemType;
+
+    public ReturnItemCommand(LibraryItemType itemType) {
+        this.itemType = itemType;
+    }
+
     @Override
     public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
         outputDriver.println(INPUT_BOOK_NAME_MESSAGE);
         String returnBook = inputDriver.readString();
-        if(library.returnItem(returnBook,BOOK)){
+        if(library.returnItem(returnBook,itemType)){
             outputDriver.println(SUCCESSFUL_RETURN_MESSAGE);
         }
         else{

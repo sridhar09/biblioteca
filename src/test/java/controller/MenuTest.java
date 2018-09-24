@@ -1,10 +1,9 @@
 package controller;
 
-import controller.command.ReturnBookCommand;
+import controller.command.ReturnItemCommand;
 import model.Book;
 import model.LibraryItem;
 import model.Library;
-import model.LibraryItemType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import view.InputDriver;
@@ -79,13 +78,13 @@ public class MenuTest {
     }
 
     @Test
-    @DisplayName("Should checkout a book form the list of books")
+    @DisplayName("Should return a book form the list of books")
     void testReturn(){
         Library mockLibrary = mock(Library.class);
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
         when(inputDriver.readString()).thenReturn("Book1");
-        new ReturnBookCommand().perform(mockLibrary,inputDriver,outputDriver);
+        new ReturnItemCommand(BOOK).perform(mockLibrary,inputDriver,outputDriver);
         verify(mockLibrary).returnItem("Book1",BOOK);
     }
 }

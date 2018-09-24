@@ -24,7 +24,7 @@ public class Library {
     public boolean checkout(String bookTitle, LibraryItemType itemType){
         LibraryItem checkoutLibraryItem = null;
         for(LibraryItem libraryItem : availableLibraryItems){
-            if(libraryItem.hasTitle(bookTitle)){
+            if(libraryItem.hasTitle(bookTitle) && libraryItem.hasItemType(itemType)){
                 checkoutLibraryItem = libraryItem;
                 break;
             }
@@ -39,7 +39,7 @@ public class Library {
     public boolean returnItem(String bookTitle, LibraryItemType itemType) {
         LibraryItem returnLibraryItem = null;
         for(LibraryItem libraryItem : checkedOutLibraryItems){
-            if(libraryItem.hasTitle(bookTitle)){
+            if(libraryItem.hasTitle(bookTitle) && libraryItem.hasItemType(itemType)){
                 returnLibraryItem = libraryItem;
                 break;
             }

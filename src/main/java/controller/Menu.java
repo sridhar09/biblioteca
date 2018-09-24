@@ -10,11 +10,11 @@ import static model.LibraryItemType.*;
 public enum Menu {
 
     LIST_BOOKS("List all the Books.",new ListItemsCommand(BOOK)),
-    CHECKOUT_BOOKS("Checkout a Book.",new CheckoutBookCommand()),
-    RETURN_BOOK("Return Book", new ReturnBookCommand()),
+    CHECKOUT_BOOKS("Checkout a Book.",new CheckoutItemCommand(BOOK)),
+    RETURN_BOOK("Return Book", new ReturnItemCommand(BOOK)),
     LIST_MOVIES("List all the Movies.",new ListItemsCommand(MOVIE)),
-    CHECKOUT_MOVIES("Checkout a Movie.",new CheckoutMovieCommand()),
-    RETURN_MOVIES("Return Movie", new ReturnMovieCommand()),
+    CHECKOUT_MOVIES("Checkout a Movie.",new CheckoutItemCommand(MOVIE)),
+    RETURN_MOVIES("Return Movie", new ReturnItemCommand(MOVIE)),
     QUIT("Quit",new QuitCommand());
 
     private final String displayName;

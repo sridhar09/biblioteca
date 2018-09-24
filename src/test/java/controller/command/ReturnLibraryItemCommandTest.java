@@ -7,7 +7,6 @@ import view.InputDriver;
 import view.OutputDriver;
 
 import static model.LibraryItemType.BOOK;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -20,7 +19,7 @@ class ReturnLibraryItemCommandTest {
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
         when(inputDriver.readString()).thenReturn("Book1");
-        new ReturnBookCommand().perform(mockLibrary,inputDriver,outputDriver);
+        new ReturnItemCommand(BOOK).perform(mockLibrary,inputDriver,outputDriver);
         verify(mockLibrary).returnItem("Book1",BOOK);
     }
 
@@ -32,7 +31,7 @@ class ReturnLibraryItemCommandTest {
         InputDriver inputDriver = mock(InputDriver.class);
         when(inputDriver.readString()).thenReturn("Book1");
         when(mockLibrary.returnItem("Book1",BOOK)).thenReturn(true);
-        new ReturnBookCommand().perform(mockLibrary,inputDriver,outputDriver);
+        new ReturnItemCommand(BOOK).perform(mockLibrary,inputDriver,outputDriver);
         verify(outputDriver).println("Thank you for returning the book.");
     }
 
@@ -44,7 +43,7 @@ class ReturnLibraryItemCommandTest {
         InputDriver inputDriver = mock(InputDriver.class);
         when(inputDriver.readString()).thenReturn("Book1");
         when(mockLibrary.returnItem("Book1",BOOK)).thenReturn(false);
-        new ReturnBookCommand().perform(mockLibrary,inputDriver,outputDriver);
+        new ReturnItemCommand(BOOK).perform(mockLibrary,inputDriver,outputDriver);
         verify(outputDriver).println("That is not a valid book to return.");
     }
 
