@@ -15,6 +15,7 @@ public enum Menu {
     LIST_MOVIES("List all the Movies.",new ListItemsCommand(MOVIE)),
     CHECKOUT_MOVIES("Checkout a Movie.",new CheckoutItemCommand(MOVIE)),
     RETURN_MOVIES("Return Movie", new ReturnItemCommand(MOVIE)),
+    LOGIN("Log in", new LoginCommand()),
     QUIT("Quit",new QuitCommand());
 
     private final String displayName;

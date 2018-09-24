@@ -7,8 +7,6 @@ import view.OutputDriver;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static model.LibraryItemType.BOOK;
-
 public class LibraryManagementSystem {
     private static final String WELCOME_MESSAGE = "Welcome to Biblioteca";
     private static final String DISPLAY_MENU_MESSAGE = "\nChoose your option from the Menu :";
@@ -19,7 +17,7 @@ public class LibraryManagementSystem {
     public LibraryManagementSystem(OutputDriver outputDriver, InputDriver inputDriver){
         this.outputDriver = outputDriver;
         this.inputDriver = inputDriver;
-        library = new Library(returnDummyLibraryItemsForLibrary());
+        library = new Library(returnDummyLibraryItemsForLibrary(), returnDummyUserForLibrary());
         startActivity();
     }
 
@@ -41,6 +39,17 @@ public class LibraryManagementSystem {
         return libraryItems;
     }
 
+    //Dummy function to add Dummy Users
+    private Collection<User> returnDummyUserForLibrary() {
+        Collection<User> users = new ArrayList<>();
+        User user1 = new User(new LoginCredential("1","1"));
+        User user2 = new User(new LoginCredential("2","2"));
+        User user3 = new User(new LoginCredential("3","3"));
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+        return users;
+    }
 
     private void startActivity(){
         printWelcomeMessage();

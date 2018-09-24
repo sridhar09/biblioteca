@@ -25,6 +25,12 @@ public class LibraryTest {
     String detail3;
     String detail4;
 
+    List<User> users;
+    User user1;
+    User user2;
+    User user3;
+    User user4;
+
     @BeforeEach
     void init(){
         libraryItem1 = new Book("libraryItem1","author1", 2000);
@@ -36,6 +42,16 @@ public class LibraryTest {
         detail2 = "libraryItem2 | author2 | 2000";
         detail3 = "libraryItem3 | author3 | 2000";
         detail4 = "libraryItem4 | author4 | 2000";
+
+        user1 = new User(new LoginCredential("1","1"));
+        user2 = new User(new LoginCredential("2","2"));
+        user3 = new User(new LoginCredential("3","3"));
+        user4 = new User(new LoginCredential("4","4"));
+        users = new ArrayList<>();
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+        users.add(user4);
     }
 
     @DisplayName("Should return string of LibraryItem Details")
@@ -44,7 +60,7 @@ public class LibraryTest {
         List<LibraryItem> libraryItems = new ArrayList<>();
         libraryItems.add(libraryItem1);
         libraryItems.add(libraryItem2);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         List<String> details = new ArrayList<>();
         details.add(detail1);
         details.add(detail2);
@@ -57,7 +73,7 @@ public class LibraryTest {
         List<LibraryItem> libraryItems = new ArrayList<>();
         libraryItems.add(libraryItem3);
         libraryItems.add(libraryItem4);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         List<String> details = new ArrayList<>();
         details.add(detail3);
         details.add(detail4);
@@ -72,7 +88,7 @@ public class LibraryTest {
         libraryItems.add(libraryItem2);
         libraryItems.add(libraryItem3);
         libraryItems.add(libraryItem4);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         List<String> details = new ArrayList<>();
         details.add(detail1);
         details.add(detail2);
@@ -93,7 +109,7 @@ public class LibraryTest {
         libraryItems.add(libraryItem2);
         libraryItems.add(libraryItem3);
         libraryItems.add(libraryItem4);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         assertTrue(library.checkout("libraryItem1",BOOK));
     }
 
@@ -105,7 +121,7 @@ public class LibraryTest {
         libraryItems.add(libraryItem2);
         libraryItems.add(libraryItem3);
         libraryItems.add(libraryItem4);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         assertFalse(library.checkout("book5",BOOK));
     }
 
@@ -117,7 +133,7 @@ public class LibraryTest {
         libraryItems.add(libraryItem2);
         libraryItems.add(libraryItem3);
         libraryItems.add(libraryItem4);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         assertTrue(library.checkout("libraryItem1",BOOK));
         assertFalse(library.checkout("libraryItem1",BOOK));
     }
@@ -129,7 +145,7 @@ public class LibraryTest {
         libraryItems.add(libraryItem2);
         libraryItems.add(libraryItem3);
         libraryItems.add(libraryItem4);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         List<String> details = new ArrayList<>();
         details.add(detail1);
         details.add(detail2);
@@ -154,7 +170,7 @@ public class LibraryTest {
         libraryItems.add(libraryItem2);
         libraryItems.add(libraryItem3);
         libraryItems.add(libraryItem4);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         assertTrue(library.checkout("libraryItem1",BOOK));
     }
 
@@ -166,8 +182,32 @@ public class LibraryTest {
         libraryItems.add(libraryItem2);
         libraryItems.add(libraryItem3);
         libraryItems.add(libraryItem4);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         assertFalse(library.checkout("book5",BOOK));
+    }
+
+    @DisplayName("Return false for successful checkout of availableBooks")
+    @Test
+    void testSuccessfulLogin(){
+        List<LibraryItem> libraryItems = new ArrayList<>();
+        libraryItems.add(libraryItem1);
+        libraryItems.add(libraryItem2);
+        libraryItems.add(libraryItem3);
+        libraryItems.add(libraryItem4);
+        Library library = new Library(libraryItems, users);
+        assertTrue(library.login(new LoginCredential("1","1")));
+    }
+
+    @DisplayName("Return false for successful checkout of availableBooks")
+    @Test
+    void testUnsuccessfulLogin(){
+        List<LibraryItem> libraryItems = new ArrayList<>();
+        libraryItems.add(libraryItem1);
+        libraryItems.add(libraryItem2);
+        libraryItems.add(libraryItem3);
+        libraryItems.add(libraryItem4);
+        Library library = new Library(libraryItems, users);
+        assertFalse(library.login(new LoginCredential("wrong","wrong")));
     }
 
 }

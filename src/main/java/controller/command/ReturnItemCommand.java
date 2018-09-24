@@ -8,7 +8,7 @@ import view.OutputDriver;
 import static model.LibraryItemType.BOOK;
 
 public class ReturnItemCommand implements Command {
-    private static final String INPUT_BOOK_NAME_MESSAGE= "LibraryItem title:\n";
+    private static final String INPUT_BOOK_NAME_MESSAGE= "Title:\n";
     private static final String SUCCESSFUL_RETURN_MESSAGE = "Thank you for returning the item.";
     private static final String UNSUCCESSFUL_RETURN_MESSAGE = "That is not a valid item to return.";
     private final LibraryItemType itemType;

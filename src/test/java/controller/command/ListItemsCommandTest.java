@@ -1,6 +1,7 @@
 package controller.command;
 
 import model.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import view.InputDriver;
@@ -16,6 +17,24 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.internal.verification.VerificationModeFactory.times;
 
 class ListItemsCommandTest {
+    List<User> users;
+    User user1;
+    User user2;
+    User user3;
+    User user4;
+
+    @BeforeEach
+    void init(){
+        user1 = new User(new LoginCredential("1","1"));
+        user2 = new User(new LoginCredential("2","2"));
+        user3 = new User(new LoginCredential("3","3"));
+        user4 = new User(new LoginCredential("4","4"));
+        users = new ArrayList<>();
+        users.add(user1);
+        users.add(user2);
+        users.add(user3);
+        users.add(user4);
+    }
 
     @Test
     @DisplayName("Should print the list of books")
@@ -25,7 +44,7 @@ class ListItemsCommandTest {
         List<LibraryItem> libraryItems = new ArrayList<>();
         libraryItems.add(libraryItem1);
         libraryItems.add(libraryItem2);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
         new ListItemsCommand(BOOK).perform(library, inputDriver, outputDriver);
@@ -45,7 +64,7 @@ class ListItemsCommandTest {
         libraryItems.add(libraryItem1);
         libraryItems.add(libraryItem2);
         libraryItems.add(libraryItem3);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
         new ListItemsCommand(BOOK).perform(library, inputDriver, outputDriver);
@@ -63,7 +82,7 @@ class ListItemsCommandTest {
         List<LibraryItem> libraryItems = new ArrayList<>();
         libraryItems.add(libraryItem1);
         libraryItems.add(libraryItem2);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
         new ListItemsCommand(MOVIE).perform(library, inputDriver, outputDriver);
@@ -82,7 +101,7 @@ class ListItemsCommandTest {
         libraryItems.add(libraryItem1);
         libraryItems.add(libraryItem2);
         libraryItems.add(libraryItem3);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
         new ListItemsCommand(MOVIE).perform(library, inputDriver, outputDriver);
@@ -104,7 +123,7 @@ class ListItemsCommandTest {
         libraryItems.add(libraryItem2);
         libraryItems.add(libraryItem3);
         libraryItems.add(libraryItem4);
-        Library library = new Library(libraryItems);
+        Library library = new Library(libraryItems, users);
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
         new ListItemsCommand(MOVIE).perform(library, inputDriver, outputDriver);

@@ -6,9 +6,13 @@ import java.util.Collection;
 public class Library {
     private Collection<LibraryItem> availableLibraryItems;
     private Collection<LibraryItem> checkedOutLibraryItems;
-    public Library(Collection<LibraryItem> availableLibraryItems){
+    private Collection<User> users;
+    private UserManager userManager;
+    public Library(Collection<LibraryItem> availableLibraryItems, Collection<User> users){
         this.availableLibraryItems = new ArrayList<>(availableLibraryItems);
         checkedOutLibraryItems = new ArrayList<>();
+        this.users = users;
+        userManager = new UserManager(new ArrayList<>(users));
     }
 
     public Collection<String> getLibraryItemList(LibraryItemType itemType){
@@ -21,10 +25,10 @@ public class Library {
         return bookTitleList;
     }
 
-    public boolean checkout(String bookTitle, LibraryItemType itemType){
+    public boolean checkout(String itemTitle, LibraryItemType itemType){
         LibraryItem checkoutLibraryItem = null;
         for(LibraryItem libraryItem : availableLibraryItems){
-            if(libraryItem.hasTitle(bookTitle) && libraryItem.hasItemType(itemType)){
+            if(libraryItem.hasTitle(itemTitle) && libraryItem.hasItemType(itemType)){
                 checkoutLibraryItem = libraryItem;
                 break;
             }
@@ -36,10 +40,10 @@ public class Library {
         return false;
     }
 
-    public boolean returnItem(String bookTitle, LibraryItemType itemType) {
+    public boolean returnItem(String itemTitle, LibraryItemType itemType) {
         LibraryItem returnLibraryItem = null;
         for(LibraryItem libraryItem : checkedOutLibraryItems){
-            if(libraryItem.hasTitle(bookTitle) && libraryItem.hasItemType(itemType)){
+            if(libraryItem.hasTitle(itemTitle) && libraryItem.hasItemType(itemType)){
                 returnLibraryItem = libraryItem;
                 break;
             }
@@ -49,5 +53,9 @@ public class Library {
             return true;
         }
         return false;
+    }
+
+    public boolean login(LoginCredential loginCredential){
+        return userManager.login(loginCredential);
     }
 }
