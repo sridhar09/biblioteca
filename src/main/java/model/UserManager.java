@@ -22,4 +22,12 @@ public class UserManager {
         return false;
     }
 
+    public User getCurrentUser(){
+        return currentUser;
+    }
+
+    public void logout(){
+        currentUser = null;
+    }
+
 }

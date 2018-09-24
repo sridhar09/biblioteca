@@ -209,5 +209,4 @@ public class LibraryTest {
         Library library = new Library(libraryItems, users);
         assertFalse(library.login(new LoginCredential("wrong","wrong")));
     }
-
 }
