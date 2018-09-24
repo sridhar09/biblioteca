@@ -1,12 +1,13 @@
 package controller;
 
-import model.Book;
-import model.Library;
+import model.*;
 import view.InputDriver;
 import view.OutputDriver;
 
 import java.util.ArrayList;
 import java.util.Collection;
+
+import static model.LibraryItemType.BOOK;
 
 public class LibraryManagementSystem {
     private static final String WELCOME_MESSAGE = "Welcome to Biblioteca";
@@ -18,19 +19,28 @@ public class LibraryManagementSystem {
     public LibraryManagementSystem(OutputDriver outputDriver, InputDriver inputDriver){
         this.outputDriver = outputDriver;
         this.inputDriver = inputDriver;
-        library = new Library(returnDummyBooksForLibrary());
+        library = new Library(returnDummyLibraryItemsForLibrary());
         startActivity();
     }
 
     //Dummy function to add Dummy books
-    private Collection<Book> returnDummyBooksForLibrary() {
-        Collection<Book> books = new ArrayList<>();
-        Book book1 = new Book("Book1", "Author1", 1940);
-        Book book2 = new Book("Book2", "Author2", 1940);
-        books.add(book1);
-        books.add(book2);
-        return books;
+    private Collection<LibraryItem> returnDummyLibraryItemsForLibrary() {
+        Collection<LibraryItem> libraryItems = new ArrayList<>();
+        LibraryItem libraryItem1 = new Book("Book1", "Author1", 1940);
+        LibraryItem libraryItem2 = new Book("Book2", "Author2", 1940);
+        LibraryItem libraryItem3 = new Book("Book3", "Author3", 1940);
+        LibraryItem libraryItem4 = new Movie("Movie1", "Director1", 1940, new Rating(10));
+        LibraryItem libraryItem5 = new Movie("Movie2", "Director2", 1940, new Rating(0));
+        LibraryItem libraryItem6 = new Movie("Movie3", "Director3", 1940, new Rating(8));
+        libraryItems.add(libraryItem1);
+        libraryItems.add(libraryItem2);
+        libraryItems.add(libraryItem3);
+        libraryItems.add(libraryItem4);
+        libraryItems.add(libraryItem5);
+        libraryItems.add(libraryItem6);
+        return libraryItems;
     }
+
 
     private void startActivity(){
         printWelcomeMessage();

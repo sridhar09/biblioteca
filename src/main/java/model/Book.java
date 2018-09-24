@@ -1,22 +1,15 @@
 package model;
 
-public class Book {
-    private final String title;
-    private final String author;
-    private final int year;
+import static model.LibraryItemType.BOOK;
 
-    public Book(String title, String author, int year) {
-        this.title = title;
-        this.author = author;
-        this.year = year;
-    }
+public class Book extends LibraryItem{
 
-    public String getTitle(){
-        return title;
+    public Book(String title, String maker, int year) {
+        super(title, maker, year , BOOK);
     }
 
     @Override
     public String toString() {
-        return title + " | " + author + " | " + year;
+        return super.title + " | " + super.maker + " | " + super.year;
     }
 }

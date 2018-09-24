@@ -7,20 +7,22 @@ import view.InputDriver;
 import view.OutputDriver;
 
 import static model.LibraryItemType.BOOK;
+import static model.LibraryItemType.MOVIE;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class CheckoutBookCommandTest {
+class ReturnMovieCommandTest {
     @Test
-    @DisplayName("Should checkout a book form the list of books")
+    @DisplayName("Should checkout a movie form the list of books")
     void testCheckout(){
         Library mockLibrary = mock(Library.class);
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
-        when(inputDriver.readString()).thenReturn("Book1");
-        new CheckoutBookCommand().perform(mockLibrary,inputDriver,outputDriver);
-        verify(mockLibrary).checkout("Book1",BOOK);
+        when(inputDriver.readString()).thenReturn("Movie1");
+        new ReturnMovieCommand().perform(mockLibrary,inputDriver,outputDriver);
+        verify(mockLibrary).returnItem("Movie1",MOVIE);
     }
 
     @Test
@@ -29,10 +31,10 @@ class CheckoutBookCommandTest {
         Library mockLibrary = mock(Library.class);
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
-        when(inputDriver.readString()).thenReturn("Book1");
-        when(mockLibrary.checkout("Book1",BOOK)).thenReturn(true);
-        new CheckoutBookCommand().perform(mockLibrary,inputDriver,outputDriver);
-        verify(outputDriver).println("Thank you! Enjoy the book");
+        when(inputDriver.readString()).thenReturn("Movie1");
+        when(mockLibrary.returnItem("Movie1",MOVIE)).thenReturn(true);
+        new ReturnMovieCommand().perform(mockLibrary,inputDriver,outputDriver);
+        verify(outputDriver).println("Thank you for returning the movie.");
     }
 
     @Test
@@ -41,10 +43,9 @@ class CheckoutBookCommandTest {
         Library mockLibrary = mock(Library.class);
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
-        when(inputDriver.readString()).thenReturn("Book1");
-        when(mockLibrary.checkout("Book1",BOOK)).thenReturn(false);
-        new CheckoutBookCommand().perform(mockLibrary,inputDriver,outputDriver);
-        verify(outputDriver).println("That book is not available");
+        when(inputDriver.readString()).thenReturn("Movie1");
+        when(mockLibrary.returnItem("Movie1", MOVIE)).thenReturn(false);
+        new ReturnMovieCommand().perform(mockLibrary,inputDriver,outputDriver);
+        verify(outputDriver).println("That is not a valid movie to return.");
     }
-
 }

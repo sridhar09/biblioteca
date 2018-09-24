@@ -5,11 +5,16 @@ import model.Library;
 import view.InputDriver;
 import view.OutputDriver;
 
+import static model.LibraryItemType.*;
+
 public enum Menu {
 
-    LIST_BOOKS("List all the Books.",new ListBooksCommand()),
+    LIST_BOOKS("List all the Books.",new ListItemsCommand(BOOK)),
     CHECKOUT_BOOKS("Checkout a Book.",new CheckoutBookCommand()),
     RETURN_BOOK("Return Book", new ReturnBookCommand()),
+    LIST_MOVIES("List all the Movies.",new ListItemsCommand(MOVIE)),
+    CHECKOUT_MOVIES("Checkout a Movie.",new CheckoutMovieCommand()),
+    RETURN_MOVIES("Return Movie", new ReturnMovieCommand()),
     QUIT("Quit",new QuitCommand());
 
     private final String displayName;
@@ -27,5 +32,4 @@ public enum Menu {
     public void action(Library library, OutputDriver outputDriver, InputDriver inputDriver){
         action.perform(library, inputDriver, outputDriver);
     }
-
 }

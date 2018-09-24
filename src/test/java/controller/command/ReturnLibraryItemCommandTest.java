@@ -7,44 +7,45 @@ import view.InputDriver;
 import view.OutputDriver;
 
 import static model.LibraryItemType.BOOK;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-class CheckoutBookCommandTest {
+class ReturnLibraryItemCommandTest {
     @Test
     @DisplayName("Should checkout a book form the list of books")
-    void testCheckout(){
+    void testReturn(){
         Library mockLibrary = mock(Library.class);
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
         when(inputDriver.readString()).thenReturn("Book1");
-        new CheckoutBookCommand().perform(mockLibrary,inputDriver,outputDriver);
-        verify(mockLibrary).checkout("Book1",BOOK);
+        new ReturnBookCommand().perform(mockLibrary,inputDriver,outputDriver);
+        verify(mockLibrary).returnItem("Book1",BOOK);
     }
 
     @Test
     @DisplayName("Should print Success Message when checkout successful")
-    void testCheckoutTrue(){
+    void testReturnTrue(){
         Library mockLibrary = mock(Library.class);
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
         when(inputDriver.readString()).thenReturn("Book1");
-        when(mockLibrary.checkout("Book1",BOOK)).thenReturn(true);
-        new CheckoutBookCommand().perform(mockLibrary,inputDriver,outputDriver);
-        verify(outputDriver).println("Thank you! Enjoy the book");
+        when(mockLibrary.returnItem("Book1",BOOK)).thenReturn(true);
+        new ReturnBookCommand().perform(mockLibrary,inputDriver,outputDriver);
+        verify(outputDriver).println("Thank you for returning the book.");
     }
 
     @Test
-    @DisplayName("Should print Failure Message when checkout unsuccessful")
-    void testCheckoutFalse(){
+    @DisplayName("Should print Success Message when checkout successful")
+    void testeturnTrue(){
         Library mockLibrary = mock(Library.class);
         OutputDriver outputDriver = mock(OutputDriver.class);
         InputDriver inputDriver = mock(InputDriver.class);
         when(inputDriver.readString()).thenReturn("Book1");
-        when(mockLibrary.checkout("Book1",BOOK)).thenReturn(false);
-        new CheckoutBookCommand().perform(mockLibrary,inputDriver,outputDriver);
-        verify(outputDriver).println("That book is not available");
+        when(mockLibrary.returnItem("Book1",BOOK)).thenReturn(false);
+        new ReturnBookCommand().perform(mockLibrary,inputDriver,outputDriver);
+        verify(outputDriver).println("That is not a valid book to return.");
     }
 
 }

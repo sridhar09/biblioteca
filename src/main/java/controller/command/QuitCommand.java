@@ -8,6 +8,5 @@ public class QuitCommand implements Command{
 
     @Override
     public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
-        System.exit(0);
     }
 }
