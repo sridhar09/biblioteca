@@ -17,7 +17,7 @@ public class LibraryItem {
         return this.title.equals(title);
     }
 
-    boolean hasItemType(LibraryItemType itemType){
+    boolean isOfItemType(LibraryItemType itemType){
         return this.itemType==itemType;
     }
 }

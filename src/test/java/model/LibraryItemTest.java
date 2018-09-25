@@ -33,14 +33,14 @@ public class LibraryItemTest {
     @Test
     void testForItemTypeTrue1(){
         LibraryItem ulysses = new LibraryItem("Ulysses", "James Joyce", 1940, MOVIE);
-        assertTrue(ulysses.hasItemType(MOVIE));
+        assertTrue(ulysses.isOfItemType(MOVIE));
     }
 
     @DisplayName("Should Expect LibraryItem Title as String")
     @Test
     void testForItemTypeTrue2(){
         LibraryItem taleOfTwoCities = new LibraryItem("Tale of two cities", "Charles Dickens", 1940, BOOK);
-        assertTrue(taleOfTwoCities.hasItemType(BOOK));
+        assertTrue(taleOfTwoCities.isOfItemType(BOOK));
     }
 
 }

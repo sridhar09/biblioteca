@@ -43,17 +43,17 @@ class UserManagerTest {
         users.add(user2);
         users.add(user3);
         users.add(user4);
-        userManager = new UserManager(users);
+        userManager = new UserManager();
     }
     @DisplayName("Return true for Correct Credentials")
     @Test
     void testForLoginTrue(){
-        assertTrue(userManager.login(loginCredential1));
+        assertTrue(userManager.login(loginCredential1,users));
     }
 
     @DisplayName("Return false for Incorrect Credentials")
     @Test
     void testForLoginFalse(){
-        assertFalse(userManager.login(wrongLoginCredential));
+        assertFalse(userManager.login(wrongLoginCredential,users));
     }
 }

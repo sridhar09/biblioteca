@@ -17,7 +17,7 @@ public class LibraryManagementSystemTest {
         verify(mockOutputDriver).println("Welcome to Biblioteca");
     }
 
-    @DisplayName("should print List of book for input 1")
+    @DisplayName("should print List of book for List Books Menu")
     @Test
     void testForDisplayMenu(){
         OutputDriver mockOutputDriver = mock(OutputDriver.class);
@@ -34,7 +34,7 @@ public class LibraryManagementSystemTest {
     void testInvalidInput(){
         OutputDriver mockOutputDriver = mock(OutputDriver.class);
         InputDriver mockInputDriver = mock(InputDriver.class);
-        when(mockInputDriver.readMenuOption()).thenReturn(Menu.values().length).thenReturn(Menu.QUIT.ordinal()+1);
+        when(mockInputDriver.readMenuOption()).thenReturn(Menu.values().length+2).thenReturn(Menu.QUIT.ordinal()+1);
         LibraryManagementSystem libraryManagementSystem = new LibraryManagementSystem(mockOutputDriver, mockInputDriver);
         libraryManagementSystem.showMenu();
         verify(mockOutputDriver).println("Select a valid option!");

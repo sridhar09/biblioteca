@@ -5,10 +5,8 @@ import model.LibraryItemType;
 import view.InputDriver;
 import view.OutputDriver;
 
-import static model.LibraryItemType.BOOK;
-
 public class CheckoutItemCommand implements Command {
-    private static final String INPUT_BOOK_NAME_MESSAGE= "\nEnter Title:";
+    private static final String INPUT_ITEM_NAME_MESSAGE = "\nEnter Title:";
     private static final String CHECKOUT_SUCCESSFUL_MESSAGE = "Thank you! Enjoy the item";
     private static final String CHECKOUT_UNSUCCESSFUL_MESSAGE = "That item is not available";
     private final LibraryItemType itemType;
@@ -19,9 +17,9 @@ public class CheckoutItemCommand implements Command {
 
     @Override
     public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
-        outputDriver.println(INPUT_BOOK_NAME_MESSAGE);
-        String checkoutBook = inputDriver.readString();
-        if(library.checkout(checkoutBook, itemType)){
+        outputDriver.println(INPUT_ITEM_NAME_MESSAGE);
+        String checkoutItemTitle = inputDriver.readString();
+        if(library.checkout(checkoutItemTitle, itemType)){
             outputDriver.println(CHECKOUT_SUCCESSFUL_MESSAGE);
         }
         else{

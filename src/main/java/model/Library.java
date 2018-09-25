@@ -12,13 +12,13 @@ public class Library {
         this.availableLibraryItems = new ArrayList<>(availableLibraryItems);
         checkedOutLibraryItems = new ArrayList<>();
         this.users = users;
-        userManager = new UserManager(new ArrayList<>(users));
+        userManager = new UserManager();
     }
 
     public Collection<String> getLibraryItemList(LibraryItemType itemType){
         Collection<String> bookTitleList = new ArrayList<>();
         for(LibraryItem libraryItem : availableLibraryItems){
-            if(libraryItem.hasItemType(itemType)){
+            if(libraryItem.isOfItemType(itemType)){
                 bookTitleList.add(libraryItem.toString());
             }
         }
@@ -28,7 +28,7 @@ public class Library {
     public boolean checkout(String itemTitle, LibraryItemType itemType){
         LibraryItem checkoutLibraryItem = null;
         for(LibraryItem libraryItem : availableLibraryItems){
-            if(libraryItem.hasTitle(itemTitle) && libraryItem.hasItemType(itemType)){
+            if(libraryItem.hasTitle(itemTitle) && libraryItem.isOfItemType(itemType)){
                 checkoutLibraryItem = libraryItem;
                 break;
             }
@@ -43,7 +43,7 @@ public class Library {
     public boolean returnItem(String itemTitle, LibraryItemType itemType) {
         LibraryItem returnLibraryItem = null;
         for(LibraryItem libraryItem : checkedOutLibraryItems){
-            if(libraryItem.hasTitle(itemTitle) && libraryItem.hasItemType(itemType)){
+            if(libraryItem.hasTitle(itemTitle) && libraryItem.isOfItemType(itemType)){
                 returnLibraryItem = libraryItem;
                 break;
             }
@@ -56,6 +56,6 @@ public class Library {
     }
 
     public boolean login(LoginCredential loginCredential){
-        return userManager.login(loginCredential);
+        return userManager.login(loginCredential, users);
     }
 }

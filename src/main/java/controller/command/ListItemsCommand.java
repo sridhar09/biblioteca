@@ -16,8 +16,8 @@ public class ListItemsCommand implements Command {
 
     @Override
     public void perform(Library library, InputDriver inputDriver, OutputDriver outputDriver) {
-        Collection<String> bookDetails = library.getLibraryItemList(itemType);
-        for(String bookDetail : bookDetails){
+        Collection<String> itemDetails = library.getLibraryItemList(itemType);
+        for(String bookDetail : itemDetails){
             outputDriver.println(bookDetail);
         }
     }
